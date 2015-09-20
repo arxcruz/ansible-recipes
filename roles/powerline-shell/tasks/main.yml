@@ -1,0 +1,31 @@
+---
+- name: Download powerline-shell from git
+  git: repo=https://github.com/powerline/powerline.git 
+       dest="{{ powerline_install }}" version=master
+
+- name: Download powerline fonts from git
+  git: repo=https://github.com/powerline/fonts.git
+       dest="{{ powerline_fonts_install }}"
+
+- name: Install powerline-shell
+  shell: python setup.py install --user
+         chdir="{{ powerline_install }}"
+
+- name: Install powerline fonts
+  shell: ./install.sh
+         chdir="{{ powerline_fonts_install }}"
+
+- name: Call fc-cache with sudo
+  shell: fc-cache -vf "{{ lookup('env', 'HOME') }}/.fonts"
+
+- name: Install powerline-shell in your bashrc
+  lineinfile:
+    dest="{{ bashrc_file }}"
+    line="{{ item }}"
+  with_items:
+    - "if [ -f `which powerline-daemon` ]; then"
+    - "  powerline-daemon -q"
+    - "  POWERLINE_BASH_CONTINUATION=1"
+    - "  POWERLINE_BASH_SELECT=1"
+    - "  . {{ powerline_shell_file }}"
+    - "fi "

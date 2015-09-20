@@ -1,0 +1,5 @@
+---
+powerline_install: "{{ lookup('env','HOME') }}/powerline/powerline"
+powerline_fonts_install: "{{ lookup('env', 'HOME') }}/powerline/fonts"
+bashrc_file: "{{ lookup('env', 'HOME') }}/.bashrc"
+powerline_shell_file: "{{ powerline_install }}/powerline/bindings/shell/powerline.sh"
