@@ -1,6 +1,6 @@
 ---
 - name: Download powerline-shell from git
-  git: repo=https://github.com/powerline/powerline.git 
+  git: repo=https://github.com/milkbikis/powerline-shell.git 
        dest="{{ powerline_install }}" version=master
 
 - name: Download powerline fonts from git
@@ -8,7 +8,7 @@
        dest="{{ powerline_fonts_install }}"
 
 - name: Install powerline-shell
-  shell: python setup.py install --user
+  shell: python install.py
          chdir="{{ powerline_install }}"
 
 - name: Install powerline fonts
@@ -21,11 +21,12 @@
 - name: Install powerline-shell in your bashrc
   lineinfile:
     dest="{{ bashrc_file }}"
+    regexp='.*{{item}}$'
     line="{{ item }}"
   with_items:
-    - "if [ -f `which powerline-daemon` ]; then"
-    - "  powerline-daemon -q"
-    - "  POWERLINE_BASH_CONTINUATION=1"
-    - "  POWERLINE_BASH_SELECT=1"
-    - "  . {{ powerline_shell_file }}"
-    - "fi "
+    - "function _update_ps1() {"
+    - '    PS1=\"$({{ powerline_install }}/powerline-shell.py 2> /dev/null)\" '
+    - '} '
+    - 'if [ "$TERM" != "linux" ]; then'
+    - '    PROMPT_COMMAND=\"_update_ps1; $PROMPT_COMMAND\"'
+    - 'fi '
