@@ -1,0 +1,4 @@
+---
+- name: Installing terminator
+  yum: name=terminator state=latest
+  when: ansible_system == 'Linux'
