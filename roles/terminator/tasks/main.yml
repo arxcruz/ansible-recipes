@@ -2,3 +2,11 @@
 - name: Installing terminator
   yum: name=terminator state=latest
   when: ansible_system == 'Linux'
+  sudo: yes
+
+- name: Create Terminator directory if doesn't exist
+  file: path="{{ terminator_config_dir }}" recurse=yes state=directory
+
+- name: Copy terminator config file from template
+  template: src=config.js dest="{{ terminator_config_file }}"
+
