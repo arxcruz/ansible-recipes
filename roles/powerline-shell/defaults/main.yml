@@ -1,6 +1,6 @@
 ---
-local_installation: "{{ lookup('env', 'HOME') }}/.local"
+local_installation: "{{ ansible_env.HOME }}/.local"
 powerline_install: "{{ local_installation }}/powerline/powerline-shell"
 powerline_fonts_install: "{{ local_installation }}/powerline/fonts"
-bashrc_file: "{{ lookup('env', 'HOME') }}/.bashrc"
+bashrc_file: "{{ ansible_env.HOME }}/.bashrc"
 powerline_shell_file: "{{ powerline_install }}/powerline/bindings/shell/powerline.sh"

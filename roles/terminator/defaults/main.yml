@@ -1,2 +1,3 @@
 ---
-terminator_config_file: "{{ lookup('env', 'HOME') }}/.config/terminator/config"
+terminator_config_dir: "{{ ansible_env.HOME }}/.config/terminator"
+terminator_config_file: "{{ terminator_config_dir }}/config"
