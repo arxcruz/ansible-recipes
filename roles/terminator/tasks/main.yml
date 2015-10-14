@@ -1,6 +1,6 @@
 ---
 - name: Installing terminator
-  yum: name=terminator state=latest
+  dnf: name=terminator state=latest
   when: ansible_system == 'Linux'
   sudo: yes
 
