@@ -21,7 +21,6 @@
 - name: Install powerline-shell in your bashrc
   lineinfile:
     dest="{{ bashrc_file }}"
-    regexp='.*{{item}}$'
     line="{{ item }}"
   with_items:
     - "function _update_ps1() {"
