@@ -4,3 +4,4 @@
     - { role: base-packages, tags: ['packages'] }
     - { role: powerline-shell, tags: ['shell'] }
     - { role: terminator, tags: ['terminal'] }
+    - { role: sublime-text, tags: ['sublimetext'] }

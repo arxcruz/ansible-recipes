@@ -1,0 +1,9 @@
+---
+sublime_filename: sublime_text_3_build_3083_x64.tar.bz2
+sublime_download_url: http://c758482.r82.cf2.rackcdn.com/{{ sublime_filename }}
+sublime_install_dir: /opt
+sublime_dest_dir: '{{ sublime_install_dir }}/sublime_text_3'
+sublime_icon: '{{ sublime_dest_dir }}/Icon/128x128/sublime-text.png'
+sublime_desktop_file: '{{ sublime_dest_dir }}/sublime_text.desktop'
+sublime_config_dir: '{{ ansible_env.HOME }}/.config/sublime-text-3'
+sublime_package_control: https://packagecontrol.io/Package%20Control.sublime-package

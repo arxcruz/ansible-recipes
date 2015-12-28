@@ -1,0 +1,47 @@
+---
+- name: Download sublime text 3
+  get_url:
+    url={{ sublime_download_url }}
+    dest=/tmp
+
+- name: Unarchive sublime text 3
+  sudo: yes
+  unarchive: 
+    dest=/opt
+    src=/tmp/{{ sublime_filename }}
+
+- name: Altering Icon in desktop file
+  sudo: yes
+  lineinfile:
+    dest={{ sublime_desktop_file }}
+    regexp=^Icon\=sublime-text
+    line=Icon={{ sublime_icon }}
+
+- name: Altering executable path in desktop file
+  sudo: yes
+  replace:
+      dest={{ sublime_desktop_file }}
+      regexp=^Exec=/opt/sublime_text/sublime_text
+      replace='Exec={{ sublime_dest_dir}}/sublime_text'
+
+- name: Creating symbolic link to /usr/share/applications
+  sudo: yes
+  file:
+    src={{ sublime_desktop_file}}
+    dest=/usr/share/applications/sublime_text.desktop
+    state=link
+
+- name: Cloning my-sublime-setup
+  git:
+    repo=https://github.com/arxcruz/my-sublime-setup
+    dest='{{ sublime_config_dir }}' version=master
+
+- name: Create Installed Packages dir
+  file:
+    dest='{{ sublime_config_dir }}/Installed Packages'
+    state=directory
+
+- name: Installing Package Control
+  get_url:
+    url={{ sublime_package_control }}
+    dest='{{ sublime_config_dir }}/Installed Packages/Package Control.sublime-package'
