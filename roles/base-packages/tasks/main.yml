@@ -5,4 +5,5 @@
     - git
     - gcc
     - fontconfig
+    - libselinux-python
   sudo: yes
